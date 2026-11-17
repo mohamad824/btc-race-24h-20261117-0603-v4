@@ -13,7 +13,7 @@ const SL_BPS = 100n;
 const LIFT_BPS = 40n;
 const TIME_STOP = 480;
 const COOLDOWN = 60;
-const FALLBACK_BAR = 1300;
+const FALLBACK_BAR = 1300; const LIFT_BAR = 1200;
 const BPS = 10000n;
 
 const closes: bigint[] = [];
@@ -54,7 +54,7 @@ await runBars({
       held++;
       const up = close * BPS >= entryPrice * (BPS + TP_BPS);
       const down = close * BPS <= entryPrice * (BPS - SL_BPS);
-      const lifted = k >= 1200 && close * BPS >= entryPrice * (BPS + LIFT_BPS);
+      const lifted = k >= LIFT_BAR && close * BPS >= entryPrice * (BPS + LIFT_BPS);
       if (up || down || (held >= TIME_STOP && !lifted)) {
         held = 0;
         cool = COOLDOWN;
